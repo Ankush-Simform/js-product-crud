@@ -18,6 +18,8 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("change", sortProduct);
 });
 
+// const saveBtn = document.getElementById("saveBtn");
+
 const handleSearch = debounce(() => {
   displayProducts();
 }, 300);
@@ -33,29 +35,34 @@ function saveProduct() {
     return;
   }
 
-  const reader = new FileReader();
-  reader.onload = function (e) {
+  console.log(imageFile);
+  console.log(products);
+  processImage(imageFile, function (imageData) {
     let products = getDB();
     const newProduct = {
       id: idCounter,
       name: name,
       price: price,
       desc: desc,
-      image: e.target.result,
+      image: imageData,
     };
-
     products.push(newProduct);
+    console.log(products);
     saveDB(products);
     updateIdCounter();
     displayProducts();
-  };
-  reader.readAsDataURL(imageFile);
+  });
 }
 
 function displayProducts(products = null) {
   if (products === null) products = getDB();
 
   let tableBody = document.getElementById("tableBody");
+  if (!products) {
+    tableBody.innerHTML =
+      '<tr> <td class="text-center">No data Available</td></tr>';
+  }
+
   let searchValue = document.getElementById("searchInput").value.toLowerCase();
 
   let filtered = products.filter(
@@ -120,13 +127,12 @@ function editProduct(id) {
 
     document.getElementById("prodDesc").value = productToEdit.desc;
     toggleForm(idCounter);
-    const saveBtn = document.getElementById("saveBtn");
+    
     saveBtn.onclick = function () {
       updateProduct(id);
     };
   }
 
-  // displayProducts();
 }
 
 function updateProduct(id) {
@@ -134,7 +140,7 @@ function updateProduct(id) {
   let products = getDB();
   let index = products.findIndex((p) => p.id === id);
 
-  // console.log(products);
+  
 
   products[index].name = document.getElementById("prodName").value;
   products[index].price = document.getElementById("prodPrice").value;
@@ -142,23 +148,35 @@ function updateProduct(id) {
   products;
   const imageFile = document.getElementById("prodImage").files[0];
   if (imageFile) {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      products[index].image = e.target.result;
+    processImage(imageFile, function (imageData) {
+      products[index].image = imageData;
       saveDB(products);
-      displayProducts();
-      toggleForm();
-    };
-    reader.readAsDataURL(imageFile);
+       displayProducts();
+
+    });
   } else {
     saveDB(products);
-  }
+  } 
 
   saveDB(products);
   toggleForm();
-  displayProducts();
+  
+}
 
+const clearAll = (id) => {
+  let products = getDB();
+  localStorage.clear();
+  resetIdCounter();
   displayProducts();
+};
+
+function processImage(file, callback) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    callback(e.target.result);
+  };
+  reader.readAsDataURL(file);
 }
 
 window.saveProduct = saveProduct;
@@ -166,3 +184,4 @@ window.deleteProduct = deleteProduct;
 window.toggleForm = toggleForm;
 window.editProduct = editProduct;
 window.updateProduct = updateProduct;
+window.clearAll = clearAll;
