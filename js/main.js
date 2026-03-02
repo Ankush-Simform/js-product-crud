@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("change", sortProduct);
 });
 
-// const saveBtn = document.getElementById("saveBtn");
 
 const handleSearch = debounce(() => {
   displayProducts();
@@ -36,7 +35,6 @@ function saveProduct() {
   }
 
   console.log(imageFile);
-  console.log(products);
   processImage(imageFile, function (imageData) {
     let products = getDB();
     const newProduct = {
@@ -71,7 +69,6 @@ function displayProducts(products = null) {
       p.name.toLowerCase().includes(searchValue) ||
       p.desc.toLowerCase().includes(searchValue),
   );
-
   tableBody.innerHTML = "";
   if (filtered.length === 0) {
     tableBody.innerHTML =
@@ -127,20 +124,17 @@ function editProduct(id) {
 
     document.getElementById("prodDesc").value = productToEdit.desc;
     toggleForm(idCounter);
-    
+
     saveBtn.onclick = function () {
       updateProduct(id);
     };
   }
-
 }
 
 function updateProduct(id) {
   let editId;
   let products = getDB();
   let index = products.findIndex((p) => p.id === id);
-
-  
 
   products[index].name = document.getElementById("prodName").value;
   products[index].price = document.getElementById("prodPrice").value;
@@ -151,16 +145,14 @@ function updateProduct(id) {
     processImage(imageFile, function (imageData) {
       products[index].image = imageData;
       saveDB(products);
-       displayProducts();
-
+      displayProducts();
     });
   } else {
     saveDB(products);
-  } 
+  }
 
   saveDB(products);
   toggleForm();
-  
 }
 
 const clearAll = (id) => {
@@ -179,9 +171,9 @@ function processImage(file, callback) {
   reader.readAsDataURL(file);
 }
 
-window.saveProduct = saveProduct;
-window.deleteProduct = deleteProduct;
-window.toggleForm = toggleForm;
-window.editProduct = editProduct;
-window.updateProduct = updateProduct;
-window.clearAll = clearAll;
+globalThis.saveProduct = saveProduct;
+globalThis.deleteProduct = deleteProduct;
+globalThis.toggleForm = toggleForm;
+globalThis.editProduct = editProduct;
+globalThis.updateProduct = updateProduct;
+globalThis.clearAll = clearAll;

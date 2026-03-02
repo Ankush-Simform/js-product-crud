@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,7 +8,7 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
     />
-    <link rel="icon" href="images/favicon.webp">
+    <link rel="icon" href="images/favicon.webp" />
     <style>
       .navbar {
         background-color: rgb(200, 135, 135);
@@ -51,23 +51,32 @@
     <div id="head" class="container">
       <h3>SIMFORM PROJECT MANAGEMENT SYSTEM</h3>
     </div>
-      <select id="filterSelect" style="border: 1px solid black; position: relative; left: 90%; color: black;">
-        <option>Filter</option>
-        <option id="ascId" value="id" data-s="asc">Sort by ID asc</option>
-        <option id="desId" value="id" data-s="des">Sort by ID</option>
-        <option id="ascName" value="name" data-s="asc">Sort By Name asc</option>
-        <option id="desName" value="name" data-s="des">Sort By Name</option>
-        <option id="ascPrice" value="price" data-s="asc">Sort By Price asc</option>
-        <option id="desPrice" value="price" data-s="des">Sort By Price</option>
-        <option id="ascDesc" value="desc" data-s="asc">Sort By Desc asc</option>
-        <option id="desDesc" value="desc" data-s="des">Sort By Desc</option>
-      </select>
+    <select
+      id="filterSelect"
+      style="
+        border: 1px solid black;
+        position: relative;
+        left: 90%;
+        color: black;
+      "
+    >
+      <option>Filter</option>
+      <option id="ascId" value="id" data-s="asc">Sort by ID asc</option>
+      <option id="desId" value="id" data-s="des">Sort by ID</option>
+      <option id="ascName" value="name" data-s="asc">Sort By Name asc</option>
+      <option id="desName" value="name" data-s="des">Sort By Name</option>
+      <option id="ascPrice" value="price" data-s="asc">
+        Sort By Price asc
+      </option>
+      <option id="desPrice" value="price" data-s="des">Sort By Price</option>
+      <option id="ascDesc" value="desc" data-s="asc">Sort By Desc asc</option>
+      <option id="desDesc" value="desc" data-s="des">Sort By Desc</option>
+    </select>
     <div
       id="formContainer"
       class="container mt-4 p-4 border rounded bg-light"
       style="display: none"
     >
-      <!-- <h1>Enter Member Details</h1> -->
       <div class="row g-3">
         <div class="col-12 col-md-3">
           <input
@@ -102,7 +111,7 @@
           />
         </div>
         <div class="col-12 text-end">
-          <button class="btn btn-secondary" onclick="toggleForm()" >
+          <button class="btn btn-secondary" onclick="toggleForm()">
             Cancel
           </button>
           <button class="btn btn-success" onclick="saveProduct()" id="saveBtn">
@@ -129,9 +138,9 @@
         </table>
       </div>
     </div>
-          <div class="imagePreview" style="display: none;">
-            <img src="" alt="image" id="imagePreview">
-          </div>
+    <div class="imagePreview" style="display: none">
+      <img src="" alt="image" id="imagePreview" />
+    </div>
     <div class="container pb-5">
       <div
         class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3 mt-3"
@@ -143,7 +152,6 @@
         >
           Add Product
         </button>
-        <!-- <button class="btn btn-info px-4">Update Product</button> -->
         <button class="btn btn-danger px-4" onclick="clearAll()">
           Clear All Data
         </button>
@@ -151,8 +159,5 @@
     </div>
 
     <script src="js/main.js" type="module" defer></script>
-    <script>
-      document.get
-    </script>
   </body>
 </html>

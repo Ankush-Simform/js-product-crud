@@ -13,7 +13,7 @@
 // document.addEventListener("DOMContentLoaded", () => {
 //   displayProducts();
 //   const searchInput = document.getElementById("searchInput");
-//   if (searchInput) {
+//   if (searchInput) {     
 //     searchInput.addEventListener("keyup", handleSearch);
 //   }
 // });

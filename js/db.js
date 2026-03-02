@@ -19,3 +19,4 @@ export function resetIdCounter() {
   idCounter = 1;
   localStorage.setItem("idCounter", idCounter);
 }
+ 
