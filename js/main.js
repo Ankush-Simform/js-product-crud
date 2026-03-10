@@ -18,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("change", sortProduct);
 });
 
-
 const handleSearch = debounce(() => {
   displayProducts();
 }, 300);
@@ -92,7 +91,13 @@ function displayProducts(products = null) {
 
 function deleteProduct(id) {
   let products = getDB();
-  products = products.filter((product) => product.id !== id);
+
+  let cnf = confirm("Are you sure you want to delete this product");
+  if (cnf) {
+    products = products.filter((product) => product.id !== id);
+  } else {
+    displayProducts();
+  }
   saveDB(products);
   displayProducts();
 }
@@ -156,9 +161,16 @@ function updateProduct(id) {
 }
 
 const clearAll = (id) => {
+  let cnf = confirm("Are you sure you want to delete this product");
+
   let products = getDB();
-  localStorage.clear();
-  resetIdCounter();
+  if (cnf) {
+    localStorage.clear();
+    resetIdCounter();
+  } else {
+    displayProducts();
+  }
+
   displayProducts();
 };
 
